@@ -333,19 +333,19 @@ def input_fn_builder(input_files,
 
     name_to_features = {
         "input_ids":
-            tf.FixedLenFeature([max_seq_length], tf.int64),
+            tf.io.FixedLenFeature([max_seq_length], tf.int64),
         "input_mask":
-            tf.FixedLenFeature([max_seq_length], tf.int64),
+            tf.io.FixedLenFeature([max_seq_length], tf.int64),
         "segment_ids":
-            tf.FixedLenFeature([max_seq_length], tf.int64),
+            tf.io.FixedLenFeature([max_seq_length], tf.int64),
         "masked_lm_positions":
-            tf.FixedLenFeature([max_predictions_per_seq], tf.int64),
+            tf.io.FixedLenFeature([max_predictions_per_seq], tf.int64),
         "masked_lm_ids":
-            tf.FixedLenFeature([max_predictions_per_seq], tf.int64),
+            tf.io.FixedLenFeature([max_predictions_per_seq], tf.int64),
         "masked_lm_weights":
-            tf.FixedLenFeature([max_predictions_per_seq], tf.float32),
+            tf.io.FixedLenFeature([max_predictions_per_seq], tf.float32),
         "next_sentence_labels":
-            tf.FixedLenFeature([1], tf.int64),
+            tf.io.FixedLenFeature([1], tf.int64),
     }
 
     # For training, we want a lot of parallel reading and shuffling.
@@ -410,7 +410,7 @@ def main(_):
 
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
 
-  tf.gfile.MakeDirs(FLAGS.output_dir)
+  tf.io.gfile.mkdir(FLAGS.output_dir)
 
   input_files = []
   for input_pattern in FLAGS.input_file.split(","):
