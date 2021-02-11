@@ -206,7 +206,7 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
         next_sentence_predictions = tf.compat.v1.argmax(
             next_sentence_log_probs, axis=-1, output_type=tf.int32)
         next_sentence_labels = tf.reshape(next_sentence_labels, [-1])
-        next_sentence_accuracy = tf.comapt.v1.metrics.accuracy(
+        next_sentence_accuracy = tf.compat.v1.metrics.accuracy(
             labels=next_sentence_labels, predictions=next_sentence_predictions)
         next_sentence_mean_loss = tf.compat.v1.metrics.mean(
             values=next_sentence_example_loss)
